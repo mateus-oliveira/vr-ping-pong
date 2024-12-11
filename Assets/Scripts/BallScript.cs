@@ -25,7 +25,7 @@ public class BallScript : MonoBehaviour
     }
 
     void SetBall() {
-        if (Input.GetKeyDown(KeyCode.BackQuote)) {
+        if (Input.GetKeyDown(KeyCode.BackQuote) || OVRInput.GetDown(OVRInput.Button.Three)) {
             transform.position = initialPosition;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             isFrozen = true;
@@ -38,7 +38,7 @@ public class BallScript : MonoBehaviour
 
         if (collidedWithRacket || collidedWithWall) {
             if (collidedWithRacket) {
-                bouncingForce = 7f;
+                bouncingForce = 0f;
                 if (isFrozen) {
                     gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                     isFrozen = false;
