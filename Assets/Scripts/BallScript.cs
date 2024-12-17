@@ -38,7 +38,7 @@ public class BallScript : MonoBehaviour
 
         if (collidedWithRacket || collidedWithWall) {
             if (collidedWithRacket) {
-                bouncingForce = 0f;
+                bouncingForce = 7f;
                 if (isFrozen) {
                     gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                     isFrozen = false;

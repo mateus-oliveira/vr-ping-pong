@@ -157,7 +157,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -221,8 +221,8 @@ Transform:
   m_GameObject: {fileID: 26706750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.022, y: 1.3, z: 3.593}
-  m_LocalScale: {x: 0.1, y: 0.31, z: 1.63}
+  m_LocalPosition: {x: 1.022, y: 1.129, z: 3.593}
+  m_LocalScale: {x: 0.1, y: 0.16, z: 1.63}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 867483299}
@@ -4597,7 +4597,8 @@ MonoBehaviour:
   playerRacket: {fileID: 313407558}
   spawnerCube: {fileID: 26706750}
   ballPrefab: {fileID: 1291743089180749407, guid: 5fecca7fcae2d06439e097fb18e80a25, type: 3}
-  ballForce: 7.5
+  ballForce: 6.25
+  offset: 1
 --- !u!1001 &929450188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12766,7 +12767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2095253998
 BoxCollider:
   m_ObjectHideFlags: 0

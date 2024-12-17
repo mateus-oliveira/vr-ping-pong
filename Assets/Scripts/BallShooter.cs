@@ -11,6 +11,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField] private GameObject ballPrefab;
 
     [SerializeField] private float ballForce = 10f;
+    [SerializeField] private float offset = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,14 @@ public class BallShooter : MonoBehaviour
         Vector3 directionToPlayer = (playerRacket.transform.position - spawnPosition).normalized;
 
         // Ajusta a direção com uma força adicional para cima
-        Vector3 shootDirection = new Vector3(directionToPlayer.x, 0.5f, directionToPlayer.z).normalized;
+        // Vector3 shootDirection = new Vector3(directionToPlayer.x, 0.5f, directionToPlayer.z).normalized;
+        // Adiciona margem de erro na direção
+        float randomOffset = Random.Range(-offset, offset); // Margem de erro ajustável (-10% a +10%)
+        Vector3 shootDirection = new Vector3(
+            directionToPlayer.x + randomOffset, 
+            0.25f, // Força vertical para subir
+            directionToPlayer.z
+        ).normalized;
 
         // Aplica uma força consistente à bola
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();

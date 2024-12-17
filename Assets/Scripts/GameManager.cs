@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             SetMode("menu");
         }
     }
@@ -30,12 +30,14 @@ public class GameManager : MonoBehaviour
     public void SetMode(string mode) {
         mode = mode.ToLower();
         ui.SetActive(mode == "menu");
+        
 
         if (mode == "service") {
             balls.SetActive(true);
             bouncingWall.SetActive(true);
 
             ballsShooter.SetActive(false);
+            ballsShooter.GetComponent<BallShooter>().CancelInvoke();
         } else if (mode == "reflexes") {
             balls.SetActive(false);
             bouncingWall.SetActive(false);
