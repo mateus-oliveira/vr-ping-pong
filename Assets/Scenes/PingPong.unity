@@ -5185,7 +5185,7 @@ MonoBehaviour:
   spawnerCube: {fileID: 26706750}
   ballPrefab: {fileID: 1291743089180749407, guid: 5fecca7fcae2d06439e097fb18e80a25, type: 3}
   ballForce: 6.25
-  offset: 1.4
+  offset: 1.2
 --- !u!1001 &929450188
 PrefabInstance:
   m_ObjectHideFlags: 0
