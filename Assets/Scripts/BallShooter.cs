@@ -25,6 +25,18 @@ public class BallShooter : MonoBehaviour
         
     }
 
+    public void ChangeBallForce(float force) {
+        ballForce = force;
+    }
+
+    public void ChangeRacketHeight(float height) {
+        spawnerCube.transform.position = new Vector3(spawnerCube.transform.position.x, height, spawnerCube.transform.position.z);
+    }
+
+    public void ChangeRacketDistance(float distance) {
+        spawnerCube.transform.position = new Vector3(distance, spawnerCube.transform.position.y, spawnerCube.transform.position.z);
+    }
+
     public void ShootBall()
     {
         // Calcula uma posição aleatória dentro do spawnerCube
@@ -36,27 +48,24 @@ public class BallShooter : MonoBehaviour
         // Move o AI Racket para a posição de spawn
         TeleportRacketToBall(ball);
 
-        // Calcula a direção horizontal para o Player Racket
-        Vector3 directionToPlayer = (playerRacket.transform.position - spawnPosition).normalized;
+        // Calcula a direção para o eixo Z (em direção ao jogador)
+        Vector3 directionToPlayer = playerRacket.transform.position - spawnPosition;
 
-        // Ajusta a direção com uma força adicional para cima
-        // Vector3 shootDirection = new Vector3(directionToPlayer.x, 0.5f, directionToPlayer.z).normalized;
-        // Adiciona margem de erro na direção
-        float randomOffset = Random.Range(-offset, offset); // Margem de erro ajustável (-10% a +10%)
+        // Ajusta a força vertical (baixa) e mantém a direção horizontal
         Vector3 shootDirection = new Vector3(
-            directionToPlayer.x + randomOffset, 
-            0.25f, // Força vertical para subir
-            directionToPlayer.z
+            directionToPlayer.x, // Direção no eixo X
+            0.3f,                // Força vertical ajustada (baixa para não subir muito)
+            directionToPlayer.z + Random.Range(-offset, offset)  // Direção no eixo Z (para o outro lado da rede)
         ).normalized;
 
-        // Aplica uma força consistente à bola
+        // Aplica a força ajustável à bola
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         if (ballRb != null)
         {
             ballRb.velocity = Vector3.zero; // Zera a velocidade inicial
             ballRb.angularVelocity = Vector3.zero;
 
-            float adjustedForce = ballForce; // Use ballForce ajustável
+            float adjustedForce = ballForce; // Use ballForce ajustável no Inspector
             ballRb.AddForce(shootDirection * adjustedForce, ForceMode.Impulse);
         }
         else
@@ -82,7 +91,7 @@ public class BallShooter : MonoBehaviour
     }
 
     private void TeleportRacketToBall(GameObject ball) {
-        Vector3 newPosition = new Vector3(aiRacket.transform.position.x, ball.transform.position.y, ball.transform.position.z);
+        Vector3 newPosition = new Vector3(ball.transform.position.x, ball.transform.position.y, ball.transform.position.z);
         aiRacket.transform.position = newPosition;
         aiRacket.GetComponent<AIRacket>().startPosition = newPosition;
     }

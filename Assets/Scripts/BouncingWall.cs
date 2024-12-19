@@ -25,7 +25,7 @@ public class BouncingWall : MonoBehaviour
     }
 
     private void TeleportRacketToBall(GameObject ball) {
-        Vector3 newPosition = new Vector3(aiRacket.transform.position.x, ball.transform.position.y, ball.transform.position.z);
+        Vector3 newPosition = new Vector3(ball.transform.position.x, ball.transform.position.y, ball.transform.position.z);
         aiRacket.transform.position = newPosition;
         aiRacket.GetComponent<AIRacket>().startPosition = newPosition;
     }

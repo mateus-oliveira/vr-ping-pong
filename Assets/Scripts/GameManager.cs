@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private string mode;
-    [SerializeField] private GameObject ui;
+    [SerializeField] private GameObject menuUi;
+    [SerializeField] private GameObject reflexesUi;
 
     // service practice mode
     [SerializeField] private GameObject balls;
@@ -29,18 +30,19 @@ public class GameManager : MonoBehaviour
 
     public void SetMode(string mode) {
         mode = mode.ToLower();
-        ui.SetActive(mode == "menu");
-        
+        menuUi.SetActive(mode == "menu");
 
         if (mode == "service") {
             balls.SetActive(true);
             bouncingWall.SetActive(true);
+            reflexesUi.SetActive(false);
 
             ballsShooter.SetActive(false);
             ballsShooter.GetComponent<BallShooter>().CancelInvoke();
         } else if (mode == "reflexes") {
             balls.SetActive(false);
             bouncingWall.SetActive(false);
+            reflexesUi.SetActive(true);
 
             ballsShooter.SetActive(true);
         }
